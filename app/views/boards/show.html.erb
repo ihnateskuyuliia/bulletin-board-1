@@ -6,32 +6,48 @@
 <div>
 <h2>Add a new post</h2>
 <form action="/insert_post/<%= @the_board.id %>"  method="post" >
+<div>
     <label for="title_field">Title</label>
-    <input type="text" id="title_field" name="title" value="<%= @the_board.name %>">
-
-    <label for="body_field">Body</label>
-    <input type="text" id="body_field" name="body" value="<%= @the_board.name %>">
-</form>
+    <input type="text" id="title_field" name="title">
 </div>
 
 <div>
-  <div>
-    <h2>Edit board</h2>
+    <label for="body_field">Body</label>
+    <textarea id="body_field" name="body" cols="30" rows="5"></textarea>
+</div>
 
-    <form action="/modify_board/<%= @the_board.id %>"  method="post" >
-      <div>
-        <label for="name_box">
-          Name
-        </label>
+<div>
+    <label for="expires_on_field">Expires on</label>
+    <input type="date" id="expires_on_field" name="expires_on">
+</div>
 
-        <input type="text" id="name_box" name="query_name" value="<%= @the_board.name %>">
-      </div>
+<div>
+    <label for="board_id_field">Board ID</label>
+    <input type="text" id="board_id_field" name="expires_on">
+</div>
+<button>Add post</button>
 
-      <button>
-        Update board
-      </button>
-    </form>
-  </div>
+</form>
 </div>
 
 <hr>
+
+<h2>Active posts</h2>
+
+<% matching_posts = Post.where({ :board_id => @the_board.id}) %>
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Posted on</th>
+    <th>Expires on</th>
+  </tr>
+
+<% matching_posts.each do |a_post| %>
+<tr>
+    <td><% a_post.title %></td>
+    <td><% a_post.body %></td>
+    <td><% a_post.created_at %></td>
+    <td><% a_post.expires_on %></td>
+  </tr>
+<% end %>
