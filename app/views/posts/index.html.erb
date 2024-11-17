@@ -55,6 +55,17 @@
 </div>
 
 <hr>
+
+<ul>
+
+<% @list_of_posts.each do |a_post| %>
+<li>
+<%= a_post.name %>
+</li>
+<% end %>
+
+</ul>
+
 <div>
   <div>
     <table border="1">
